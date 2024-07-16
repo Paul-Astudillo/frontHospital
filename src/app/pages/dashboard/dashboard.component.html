@@ -1,0 +1,49 @@
+<div class="container mt-5">
+  <h2 class="mb-4">Dashboard</h2>
+
+  <div class="row">
+    <div class="col-md-4 mb-3">
+      <div class="card text-white bg-primary">
+        <div class="card-body">
+          <h5 class="card-title">Total Pacientes</h5>
+          <p class="card-text">{{ totalPatients }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-3">
+      <div class="card text-white bg-success">
+        <div class="card-body">
+          <h5 class="card-title">Total Doctores</h5>
+          <p class="card-text">{{ totalDoctors }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-3">
+      <div class="card text-white bg-warning">
+        <div class="card-body">
+          <h5 class="card-title">Informes Recientes</h5>
+          <p class="card-text">{{ recentReports }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-md-6 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Pacientes por Mes</h5>
+          <div class="chart" id="patientsByMonth"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Distribución de Género de los Pacientes</h5>
+          <div class="chart" id="genderDistribution"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

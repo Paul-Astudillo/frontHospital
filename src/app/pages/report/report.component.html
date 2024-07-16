@@ -1,0 +1,37 @@
+<div class="container">
+    <app-header></app-header>
+    <div class="form-container">
+      <form>
+        <div class="form-group">
+          <label for="name">Nombre:</label>
+          <input type="text" class="form-control" id="name" name="name">
+        </div>
+        <div class="form-group">
+          <label for="age">Edad:</label>
+          <input type="number" class="form-control" id="age" name="age">
+        </div>
+        <div class="form-group">
+          <label for="gender">Género:</label>
+          <select class="form-control" id="gender" name="gender">
+            <option value="male">Masculino</option>
+            <option value="female">Femenino</option>
+            <option value="other">Otro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="patientId">ID del Paciente:</label>
+          <input type="text" class="form-control" id="patientId" name="patientId">
+        </div>
+        <div class="form-group">
+          <label for="preDiagnosis">Prediagnóstico:</label>
+          <textarea class="form-control" id="preDiagnosis" name="preDiagnosis"></textarea>
+        </div>
+        <div class="form-group">
+          <button type="button" class="btn btn-primary">Predecir</button>
+          <button type="button" class="btn btn-secondary">Seleccionar Archivos</button>
+          <button type="button" class="btn btn-primary">Cargar archivos</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

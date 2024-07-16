@@ -1,0 +1,28 @@
+<div class="container mt-5">
+    <h2 class="mb-4">Lista de Doctores</h2>
+    <div class="mb-3">
+      <button class="btn btn-primary" (click)="addDoctor()">Agregar Doctor</button>
+    </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Especialidad</th>
+          <th>Teléfono</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let doctor of doctors">
+          <td>{{ doctor.name }}</td>
+          <td>{{ doctor.specialty }}</td>
+          <td>{{ doctor.phone }}</td>
+          <td>
+            <button class="btn btn-sm btn-info" (click)="editDoctor(doctor)">Editar</button>
+            <button class="btn btn-sm btn-danger" (click)="deleteDoctor(doctor)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

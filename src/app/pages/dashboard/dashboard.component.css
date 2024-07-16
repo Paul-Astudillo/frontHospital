@@ -1,0 +1,23 @@
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .card {
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+  }
+  
+  .chart svg {
+    width: 100%;
+    height: auto;
+  }
+  
+  .w-100 {
+    width: 100%;
+  }
+  
