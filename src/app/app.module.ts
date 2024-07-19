@@ -11,6 +11,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { DoctorsComponent } from './pages/doctors/doctors.component';
 import { PatientsComponent } from './pages/patients/patients.component';
 import { Hl7FormComponent } from './pages/hl7-form/hl7-form.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { Hl7FormComponent } from './pages/hl7-form/hl7-form.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
   ],
   providers: [AudioRecorderService],
   bootstrap: [AppComponent]

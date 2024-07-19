@@ -1,3 +1,9 @@
+.body{
+  font-family: 'Roboto', sans-serif;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Roboto', sans-serif;
+}
 .container {
     max-width: 1000px;
     margin: 0 auto;
@@ -20,4 +26,14 @@
   .w-100 {
     width: 100%;
   }
-  
+
+.card-color{
+  background-color: #66CCFF;
+}
+
+.card-color2{
+  background-color: #003366;
+}
+.card-color3{
+  background-color:  #66FF99;
+}

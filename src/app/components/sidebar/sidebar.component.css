@@ -1,32 +1,72 @@
+/* Sidebar básico */
 .sidebar {
   width: 250px;
   position: fixed;
   top: 0;
   left: 0;
   height: 100%;
-  overflow-y: auto;
-  background-color: #f8f9fa;
+  transition: width 0.3s;
 }
 
+.sidebar.collapsed {
+  width: 60px;
+}
+
+/* Logo */
 .logo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
   padding: 20px;
   text-align: center;
   border-bottom: 1px solid #ddd;
+  transition: padding 0.3s;
+}
+
+.sidebar.collapsed .logo {
+  padding: 10px;
 }
 
 .logo img {
   max-width: 100%;
   height: auto;
+  transition: width 0.3s;
 }
 
+.sidebar.collapsed .logo img {
+  width: 40px;
+  margin: 0 auto;
+}
+
+.logo h3 {
+  color: #0056b3;
+  box-shadow: 2px 2px 2px 2px;
+  transition: opacity 0.3s;
+}
+
+.sidebar.collapsed .logo h3 {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Navegación */
 .nav {
   padding: 20px;
 }
 
 .nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   color: #000;
   margin-bottom: 10px;
   font-weight: 500;
+  transition: all 0.3s;
+}
+
+.nav-link img {
+  width: 24px;
+  height: 24px;
 }
 
 .nav-link:hover {
@@ -39,4 +79,36 @@
   background-color: #007bff;
   color: #fff;
   border-radius: 5px;
+}
+
+.sidebar.collapsed .nav-link {
+  justify-content: center;
+}
+
+.sidebar.collapsed .nav-link span {
+  display: none;
+}
+
+/* Botón de colapso */
+.botonColapso {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+}
+
+.botonColapso button {
+  padding: 0.5rem;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+/* Contenido principal */
+.content {
+  margin-left: 250px;
+  transition: margin-left 0.3s;
+}
+
+.sidebar.collapsed ~ .content {
+  margin-left: 60px;
 }

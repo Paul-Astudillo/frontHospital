@@ -7,6 +7,17 @@ import { AudioRecorderService } from 'src/app/audio-recorder.service';
   styleUrls: ['./hl7-form.component.css']
 })
 export class Hl7FormComponent {
+    paciente = {
+    nombre: '',
+    id: '',
+    fechaNacimiento: '',
+    genero: '',
+    direccion: '',
+    celular: '',
+    correo: '',
+    diagnostico: '',
+    alergias: ''
+  };
   isRecording = false;
   blobUrl: string | null = null;
 
@@ -20,13 +31,18 @@ export class Hl7FormComponent {
   }
 
   startRecording() {
+    const svg = document.querySelector('.btn-primary svg');
+    svg?.classList.toggle('animate');
     this.isRecording = true;
     this.audioRecorderService.startRecording();
   }
 
   stopRecording() {
+    const svg = document.querySelector('.btn-primary svg');
+    svg?.classList.toggle('animate');
     this.isRecording = false;
     this.audioRecorderService.stopRecording();
+    this.llenarFormularioConDatosAleatorios();
   }
 
   downloadAudio() {
@@ -39,5 +55,17 @@ export class Hl7FormComponent {
       document.body.removeChild(a);
     }
   }
-
+  llenarFormularioConDatosAleatorios() {
+    this.paciente = {
+      nombre: 'John Doe',
+      id: '123456',
+      fechaNacimiento: '01/01/1980',
+      genero: 'Masculino',
+      direccion: '123 Calle Principal',
+      celular: '555-1234',
+      correo: 'john.doe@example.com',
+      diagnostico: 'Diagnóstico aleatorio',
+      alergias: 'Ninguna'
+    };
+  }
 }

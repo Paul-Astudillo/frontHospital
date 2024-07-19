@@ -34,9 +34,9 @@ export class DashboardComponent {
     if (container) {
       container.innerHTML = `
         <svg viewBox="0 0 32 32" class="w-100">
-          <circle r="16" cx="16" cy="16" fill="#007bff" />
-          <circle r="11" cx="16" cy="16" fill="#28a745" />
-          <circle r="6" cx="16" cy="16" fill="#ffc107" />
+         <path d="M 16, 0 A 16, 16 0 1, 1 16, 32 Z" fill="#66CCFF" />  
+        <path d="M 16, 32 A 16, 16 0 0, 1 16, 0 Z" fill="#66FF99" />
+        <circle r="11" cx="16" cy="16" fill="#ffffff" />    
         </svg>
       `;
     }

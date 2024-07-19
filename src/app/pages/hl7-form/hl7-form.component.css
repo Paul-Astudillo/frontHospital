@@ -1,3 +1,9 @@
+.body{
+  font-family: 'Roboto', sans-serif;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Roboto', sans-serif;
+}
 .container {
   max-width: 800px;
   margin: 0 auto;
@@ -16,11 +22,20 @@ label {
   margin-bottom: 5px;
 }
 
-input, textarea, select {
-  width: 100%;
-  padding: 10px;
-  box-sizing: border-box;
-}
+input, textarea {
+    border: none;
+    background-color: #74d1ff48;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+   select {
+    border: none;
+    background-color: #74d1ff48;
+    width: 100%;
+    padding: 5p;
+    box-sizing: border-box;
+  }
 
 button {
   margin-right: 10px;
@@ -29,4 +44,25 @@ button {
 audio {
   display: block;
   margin-top: 20px;
+}
+
+.wave {
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 2;
+}
+
+.animate .wave {
+  animation: wave-animation 4s infinite ease-in-out;
+}
+
+@keyframes wave-animation {
+  0% {
+    r: 5;
+    opacity: 1;
+  }
+  100% {
+    r: 20;
+    opacity: 0;
+  }
 }

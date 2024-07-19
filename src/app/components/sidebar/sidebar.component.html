@@ -1,12 +1,35 @@
-<div class="sidebar bg-light border-right">
-  <div class="logo p-3 text-center border-bottom">
-    <img src="assets/logo.png" alt="MediVOX Logo" class="img-fluid mx-auto d-block" style="max-width: 80px;">
+<div [class.collapsed]="isCollapsed" class="sidebar bg-light border-right">
+  <div class="botonColapso">
+    <button (click)="toggleSidebar()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5M10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5"/>
+      </svg>
+    </button>
   </div>
-  <nav class="nav flex-column p-3">
-    <a class="nav-link" routerLink="/dashboard">Dashboard</a>
-    <a class="nav-link" routerLink="/doctors">Doctores</a>
-    <a class="nav-link" routerLink="/patients">Pacientes</a>
-    <a class="nav-link" routerLink="/report">Reporte</a>
-    <a class="nav-link" routerLink="/hl7-form">HL7 Form</a>
+  <div [ngClass]="{'p-3': !isCollapsed, 'p-1': isCollapsed}" class="logo p-3 text-center border-bottom">
+    <img src="assets/logo.jpg" alt="MediVOX Logo" class="img-fluid mx-auto d-block" style="max-width: 80px;">
+    <h3>Med-AI Assistant</h3>
+  </div>
+  <nav [ngClass]="{'p-3': !isCollapsed, 'p-1': isCollapsed}" class="nav flex-column p-3">
+    <a class="nav-link" routerLink="/dashboard">
+      <img src="../assets/supervision.png" alt="icono">
+      <span>Dashboard</span>
+    </a>
+    <a class="nav-link" routerLink="/doctors">
+      <img src="../assets/estetoscopio.png" alt="icono">
+      <span>Doctores</span>
+    </a>
+    <a class="nav-link" routerLink="/patients">
+      <img src="../assets/paciente.png" alt="icono">
+      <span>Pacientes</span>
+    </a>
+    <a class="nav-link" routerLink="/report">
+      <img src="../assets/reporte.png" alt="icono">
+      <span>Reporte</span>
+    </a>
+    <a class="nav-link" routerLink="/hl7-form">
+      <img src="../assets/formulario-de-firma.png" alt="icono">
+      <span>HL7 Form</span>
+    </a>
   </nav>
 </div>
