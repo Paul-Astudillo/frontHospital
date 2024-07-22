@@ -12,6 +12,7 @@ import { DoctorsComponent } from './pages/doctors/doctors.component';
 import { PatientsComponent } from './pages/patients/patients.component';
 import { Hl7FormComponent } from './pages/hl7-form/hl7-form.component';
 import { FormsModule } from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http'
 
 @NgModule({
   declarations: [
@@ -22,12 +23,15 @@ import { FormsModule } from '@angular/forms';
     DashboardComponent,
     DoctorsComponent,
     PatientsComponent,
-    Hl7FormComponent
+    Hl7FormComponent,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule
+    
   ],
   providers: [AudioRecorderService],
   bootstrap: [AppComponent]

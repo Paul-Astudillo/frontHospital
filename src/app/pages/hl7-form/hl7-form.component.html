@@ -1,3 +1,5 @@
+<div class="main-container-page">
+  
 <div class="container mt-5">
   <h2 class="mb-4">Formulario HL7</h2>
   <form>
@@ -63,4 +65,20 @@
       <p>Audio stored temporarily at: <a [href]="blobUrl" target="_blank">{{blobUrl}}</a></p>
     </div>
   </form>
+</div>
+
+<div class="container mt-5 d-flex flex-row">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Subir Tomografías</h5>
+      <div class="upload-area" (click)="onAreaClick(fileInput)" (drop)="onFileDrop($event)" (dragover)="$event.preventDefault()" id="uploadArea">
+        Arrastra y suelta los archivos aquí o
+        <input type="file" (change)="onFileSelected($event)" id="fileInput" multiple>
+      </div>
+      <button class="btn btn-primary mt-3" id="uploadButton" (click)="onUpload()">Subir</button>
+    </div>
+  </div>
+</div>
+
+
 </div>

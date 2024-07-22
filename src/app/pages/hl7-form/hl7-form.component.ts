@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild} from '@angular/core';
 import { AudioRecorderService } from 'src/app/audio-recorder.service';
+import { UploadFilesService } from 'src/app/services/upload-files.service';
 
 @Component({
   selector: 'app-hl7-form',
@@ -21,13 +22,47 @@ export class Hl7FormComponent {
   isRecording = false;
   blobUrl: string | null = null;
 
-  constructor(private audioRecorderService: AudioRecorderService) {
+  //archivos
+  selectedFiles: FileList | null = null;
+
+  @ViewChild('fileInput', { static: false }) fileInput!: ElementRef;
+
+  constructor(private audioRecorderService: AudioRecorderService, private uploadFilesService: UploadFilesService) {
     this.audioRecorderService.recordedBlob$.subscribe(data => {
       this.blobUrl = URL.createObjectURL(data.blob);
     });
     this.audioRecorderService.recordingFailed$.subscribe(() => {
       alert('Recording failed');
     });
+  }
+
+  onFileSelected(event : any): void{
+    this.selectedFiles = event.target.files;
+  }
+  onUpload(): void {
+    if (this.selectedFiles) {
+      this.uploadFilesService.uploadFiles(this.selectedFiles).subscribe(
+        response => {
+          console.log('Upload successful!', response);
+          alert('Archivos subidos exitosamente!');
+        },
+        error => {
+          console.error('Upload failed!', error);
+          alert('Error al subir archivos: ' + error);
+        }
+      );
+    } else {
+      alert('Por favor, selecciona archivos para subir.');
+    }
+  }
+
+  onAreaClick(fileInput: ElementRef): void {
+    fileInput.nativeElement.click();
+  }
+
+  onFileDrop(event: any): void {
+    event.preventDefault();
+    this.selectedFiles = event.dataTransfer.files;
   }
 
   startRecording() {
