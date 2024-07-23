@@ -22,8 +22,11 @@ export class Hl7FormComponent {
   isRecording = false;
   blobUrl: string | null = null;
 
-  //archivos
-  selectedFiles: FileList | null = null;
+  //
+  t1cFile: File | null = null;
+  t2fFile: File | null = null;
+  predictionUrl: string | null = null;
+
 
   @ViewChild('fileInput', { static: false }) fileInput!: ElementRef;
 
@@ -36,33 +39,63 @@ export class Hl7FormComponent {
     });
   }
 
-  onFileSelected(event : any): void{
-    this.selectedFiles = event.target.files;
+  onFileSelected(event: any, fileType: string): void {
+    const file = event.target.files[0];
+    if (fileType === 't1c') {
+      this.t1cFile = file;
+    } else if (fileType === 't2f') {
+      this.t2fFile = file;
+    }
   }
+
   onUpload(): void {
-    if (this.selectedFiles) {
-      this.uploadFilesService.uploadFiles(this.selectedFiles).subscribe(
-        response => {
-          console.log('Upload successful!', response);
-          alert('Archivos subidos exitosamente!');
+    if (this.t1cFile && this.t2fFile) {
+      this.uploadFilesService.uploadFiles(this.t1cFile, this.t2fFile).subscribe(
+        blob => {
+          this.createImageFromBlob(blob);
+          alert('Predicción recibida exitosamente!');
         },
         error => {
           console.error('Upload failed!', error);
-          alert('Error al subir archivos: ' + error);
+          alert('Error al subir archivo: ' + error);
         }
       );
     } else {
-      alert('Por favor, selecciona archivos para subir.');
+      alert('Por favor, selecciona ambos archivos para subir.');
     }
   }
+
+  private createImageFromBlob(image: Blob): void {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => {
+      this.predictionUrl = reader.result as string;
+    }, false);
+
+    if (image) {
+      reader.readAsDataURL(image);
+    }
+  }
+
 
   onAreaClick(fileInput: ElementRef): void {
     fileInput.nativeElement.click();
   }
 
-  onFileDrop(event: any): void {
+  // onFileDrop(event: any): void {
+  //   event.preventDefault();
+  //   this.selectedFiles = event.dataTransfer.files;
+  // }
+
+  onFileDrop(event: DragEvent, fileType: string): void {
     event.preventDefault();
-    this.selectedFiles = event.dataTransfer.files;
+    const file = event.dataTransfer?.files[0];
+    if (file) {
+      if (fileType === 't1c') {
+        this.t1cFile = file;
+      } else if (fileType === 't2f') {
+        this.t2fFile = file;
+      }
+    }
   }
 
   startRecording() {

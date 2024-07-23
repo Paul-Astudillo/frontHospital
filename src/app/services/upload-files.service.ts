@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,16 +12,18 @@ export class UploadFilesService {
 
   constructor(private http: HttpClient) { }
 
-  uploadFiles(files: FileList): Observable<any> {
+  uploadFiles(t1cFile: File, t2fFile: File): Observable<Blob> {
     const formData: FormData = new FormData();
-    for (let i = 0; i < files.length; i++) {
-      formData.append('files', files[i], files[i].name);
-    }
+    formData.append('t1c_file', t1cFile, t1cFile.name);
+    formData.append('t2f_file', t2fFile, t2fFile.name);    
 
-    return this.http.post(this.uploadUrl, formData)
-      .pipe(
-        catchError(this.handleError)
-      );
+    return this.http.post(this.uploadUrl, formData, {
+      responseType: 'blob',
+      observe: 'response'
+    }).pipe( 
+      map(response => response.body as Blob),
+      catchError(this.handleError)
+    );
   }
 
 

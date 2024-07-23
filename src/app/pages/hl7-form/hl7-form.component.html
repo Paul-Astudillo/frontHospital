@@ -71,13 +71,29 @@
   <div class="card">
     <div class="card-body">
       <h5 class="card-title">Subir Tomografías</h5>
-      <div class="upload-area" (click)="onAreaClick(fileInput)" (drop)="onFileDrop($event)" (dragover)="$event.preventDefault()" id="uploadArea">
+      <div class="upload-area" (click)="fileInputT1c.click()" (drop)="onFileDrop($event, 't1c')" (dragover)="$event.preventDefault()" id="uploadArea">
         Arrastra y suelta los archivos aquí o
-        <input type="file" (change)="onFileSelected($event)" id="fileInput" multiple>
+        <input type="file" #fileInputT1c (change)="onFileSelected($event, 't1c')" hidden>
+      
+      </div>
+      <div class="upload-area" (click)="fileInputT2f.click()" (drop)="onFileDrop($event, 't2f')" (dragover)="$event.preventDefault()" id="uploadArea">
+        Arrastra y suelta los archivos aquí o
+        <input type="file" #fileInputT2f (change)="onFileSelected($event, 't1c')" hidden>  
       </div>
       <button class="btn btn-primary mt-3" id="uploadButton" (click)="onUpload()">Subir</button>
     </div>
+
+
   </div>
+
+
+  <div *ngIf="predictionUrl" class="card">
+    <div class="card-body">
+      <h5 class="card-title">Resultado de la Segmentación</h5>
+      <img [src]="predictionUrl" alt="Predicción de Segmentación" class="img-fluid">
+    </div>
+  </div>
+
 </div>
 
 
