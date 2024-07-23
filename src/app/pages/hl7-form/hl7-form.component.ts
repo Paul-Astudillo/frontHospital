@@ -25,6 +25,7 @@ export class Hl7FormComponent {
   //
   t1cFile: File | null = null;
   t2fFile: File | null = null;
+  icono: boolean = true;
   predictionUrl: string | null = null;
 
 
@@ -39,11 +40,13 @@ export class Hl7FormComponent {
     });
   }
 
-  onFileSelected(event: any, fileType: string): void {
+  onFileSelected(event: any, fileType: string): void { 
     const file = event.target.files[0];
     if (fileType === 't1c') {
+      this.icono=false
       this.t1cFile = file;
     } else if (fileType === 't2f') {
+      this.icono=false
       this.t2fFile = file;
     }
   }
