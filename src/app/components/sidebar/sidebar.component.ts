@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,5 +10,13 @@ export class SidebarComponent {
 
   toggleSidebar() {
     this.isCollapsed = !this.isCollapsed;
+  }
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    if (event.target.innerWidth <= 555) {
+      this.isCollapsed = true;
+    } else {
+      this.isCollapsed = false;
+    }
   }
 }

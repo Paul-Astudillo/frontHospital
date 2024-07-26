@@ -100,3 +100,17 @@ audio {
 .upload-area.dragover {
   border-color: #007bff;
 }
+.prediccion{
+  display: flex;
+  position: relative;
+  bottom: 20rem;
+}
+@media (width <= 555px) {
+  .main-container-page{
+    display: flex;
+    flex-direction: column;
+  }
+  .prediccion{
+    bottom: auto;
+  }
+}

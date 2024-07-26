@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { observeNotification } from 'rxjs/internal/Notification';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +10,10 @@ import { catchError, map } from 'rxjs/operators';
 export class UploadFilesService {
 
   private uploadUrl = 'http://localhost:8000/api/subirtomografia';
+  private uploadUrlForAudio ='http://localhost:8000/api/subiraudio';
 
   constructor(private http: HttpClient) { }
+
 
   uploadFiles(t1cFile: File, t2fFile: File): Observable<Blob> {
     const formData: FormData = new FormData();
@@ -22,6 +25,16 @@ export class UploadFilesService {
       observe: 'response'
     }).pipe( 
       map(response => response.body as Blob),
+      catchError(this.handleError)
+    );
+  }
+  uploadAudio(audio: Blob): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('file', audio, 'audio.wav');
+    return this.http.post(this.uploadUrlForAudio, formData, {
+      responseType: 'json',
+    }).pipe( 
+      map(response => response),
       catchError(this.handleError)
     );
   }

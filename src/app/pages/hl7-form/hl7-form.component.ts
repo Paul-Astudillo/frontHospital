@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild} from '@angular/core';
 import { AudioRecorderService } from 'src/app/audio-recorder.service';
 import { UploadFilesService } from 'src/app/services/upload-files.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-hl7-form',
@@ -27,7 +28,7 @@ export class Hl7FormComponent {
   t2fFile: File | null = null;
   icono: boolean = true;
   predictionUrl: string | null = null;
-
+  mensaje: string = ''
 
   @ViewChild('fileInput', { static: false }) fileInput!: ElementRef;
 
@@ -50,21 +51,38 @@ export class Hl7FormComponent {
       this.t2fFile = file;
     }
   }
-
+  
   onUpload(): void {
     if (this.t1cFile && this.t2fFile) {
       this.uploadFilesService.uploadFiles(this.t1cFile, this.t2fFile).subscribe(
         blob => {
           this.createImageFromBlob(blob);
-          alert('Predicción recibida exitosamente!');
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Predicción recibida exitosamente!",
+            showConfirmButton: false,
+            timer: 1500
+          });
         },
         error => {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Error al subir archivo:"+ error,
+          });
           console.error('Upload failed!', error);
-          alert('Error al subir archivo: ' + error);
         }
       );
     } else {
-      alert('Por favor, selecciona ambos archivos para subir.');
+      Swal.fire({
+        position: "center",
+        icon: "warning",
+        title: "Por favor, selecciona ambos archivos para subir",
+        showConfirmButton: false,
+        timer: 1500
+      });
+      //alert('Por favor, selecciona ambos archivos para subir.');
     }
   }
 
@@ -105,7 +123,15 @@ export class Hl7FormComponent {
     const svg = document.querySelector('.btn-primary svg');
     svg?.classList.toggle('animate');
     this.isRecording = true;
-    this.audioRecorderService.startRecording();
+    this.audioRecorderService.startRecording().then(
+      mensaje => {
+        this.mensaje = mensaje;
+      },
+      error => {
+        console.error('Error:', error);
+        this.mensaje = 'Recording failed. Please try again.';
+      }
+    );;
   }
 
   stopRecording() {
