@@ -10,7 +10,7 @@ import { observeNotification } from 'rxjs/internal/Notification';
 export class UploadFilesService {
 
   private uploadUrl = 'http://localhost:8000/api/subirtomografia';
-  private uploadUrlForAudio ='http://localhost:8000/api/subiraudio';
+  private uploadUrlForAudio ='http://localhost:8000/apiVoice/subiraudio';
 
   constructor(private http: HttpClient) { }
 
