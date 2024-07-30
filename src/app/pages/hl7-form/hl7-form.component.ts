@@ -1,4 +1,6 @@
+import { compileNgModule } from '@angular/compiler';
 import { Component, ElementRef, ViewChild} from '@angular/core';
+import { config } from 'rxjs';
 import { AudioRecorderService } from 'src/app/audio-recorder.service';
 import { ApichatgptService } from 'src/app/services/apichatgpt.service';
 import { UploadFilesService } from 'src/app/services/upload-files.service';
@@ -32,54 +34,54 @@ export class Hl7FormComponent {
   t2fFile: File | null = null;
   icono: boolean = true;
   predictionUrl: string | null = null;
-  //mensaje: string = '';
+  mensaje: string = '';
   response: string= '';
 
-  mensaje: string = `Extrae la informacion del Paciente y devuelve como un Json: Buenos días, señor González. ¿Cómo se encuentra hoy?
+  // mensaje: string = `Extrae la informacion del Paciente y devuelve como un Json: Buenos días, señor González. ¿Cómo se encuentra hoy?
 
-  Buenos días, doctor. Me siento un poco mejor, gracias. ¿Qué necesitamos revisar hoy?
+  // Buenos días, doctor. Me siento un poco mejor, gracias. ¿Qué necesitamos revisar hoy?
   
-  Vamos a completar algunos datos para actualizar su expediente. ¿Puede decirme su nombre completo?
+  // Vamos a completar algunos datos para actualizar su expediente. ¿Puede decirme su nombre completo?
   
-  Claro, mi nombre es Juan Carlos González.
+  // Claro, mi nombre es Juan Carlos González.
   
-  Perfecto, Juan Carlos. ¿Cuál es su ID de paciente?
+  // Perfecto, Juan Carlos. ¿Cuál es su ID de paciente?
   
-  Mi ID es 987654.
+  // Mi ID es 987654.
   
-  ¿Y cuántos años tiene, Juan Carlos?
+  // ¿Y cuántos años tiene, Juan Carlos?
   
-  Tengo 45 años.
+  // Tengo 45 años.
   
-  Entendido. ¿Cuál es su género?
+  // Entendido. ¿Cuál es su género?
   
-  Soy masculino.
+  // Soy masculino.
   
-  Muy bien. ¿Me puede proporcionar su dirección actual?
+  // Muy bien. ¿Me puede proporcionar su dirección actual?
   
-  Sí, vivo en la Calle Falsa 123, Ciudad Ficticia.
+  // Sí, vivo en la Calle Falsa 123, Ciudad Ficticia.
   
-  Gracias. ¿Y su número de celular?
+  // Gracias. ¿Y su número de celular?
   
-  Mi número de celular es 123-456-7890.
+  // Mi número de celular es 123-456-7890.
   
-  Perfecto. ¿Podría darme su correo electrónico?
+  // Perfecto. ¿Podría darme su correo electrónico?
   
-  Claro, es juancarlos.gonzalez@example.com.
+  // Claro, es juancarlos.gonzalez@example.com.
   
-  Gracias. Ahora, respecto a su diagnóstico, ¿podría describirme brevemente sus síntomas y el diagnóstico actual?
+  // Gracias. Ahora, respecto a su diagnóstico, ¿podría describirme brevemente sus síntomas y el diagnóstico actual?
   
-  He tenido dolores de cabeza constantes y náuseas. El diagnóstico actual es migraña crónica.
+  // He tenido dolores de cabeza constantes y náuseas. El diagnóstico actual es migraña crónica.
   
-  Entendido. ¿Tiene alguna alergia que debamos tener en cuenta?
+  // Entendido. ¿Tiene alguna alergia que debamos tener en cuenta?
   
-  Sí, soy alérgico a la penicilina.
+  // Sí, soy alérgico a la penicilina.
   
-  Muy bien, Juan Carlos. Hemos completado toda la información necesaria. ¿Hay algo más que quiera agregar?
+  // Muy bien, Juan Carlos. Hemos completado toda la información necesaria. ¿Hay algo más que quiera agregar?
   
-  No, eso sería todo, doctor. Muchas gracias.
+  // No, eso sería todo, doctor. Muchas gracias.
   
-  De nada, Juan Carlos. Cuídese mucho y estamos en contacto para cualquier cosa que necesite.`;
+  // De nada, Juan Carlos. Cuídese mucho y estamos en contacto para cualquier cosa que necesite.`;
 
   @ViewChild('fileInput', { static: false }) fileInput!: ElementRef;
 
@@ -190,7 +192,7 @@ export class Hl7FormComponent {
     svg?.classList.toggle('animate');
     this.isRecording = false;
     this.audioRecorderService.stopRecording();
-    this.llenarFormularioConDatosAleatorios();
+    //this.llenarFormularioConDatosAleatorios();
   }
 
   downloadAudio() {
@@ -217,8 +219,11 @@ export class Hl7FormComponent {
     };
   }
 
+  prompt: string = "Del siguiente texto extrae informacion del paciente, como nombres, correo, edad, id, alergias, sintomas, un prediagnostico, etc. Todo esta info devuelve en un archivo Json : "
 
   sendMessage() {
+    console.log('promtp '+this.prompt)
+    this.mensaje = this.prompt + this.mensaje 
     this.apichatgptService.sendMessage(this.mensaje).subscribe(
       data => {
         this.response = data.response;
@@ -227,9 +232,13 @@ export class Hl7FormComponent {
         console.error('Error:', error);
       }
     );
+
+    console.log('repuesta '+this.response)
+    console.log(typeof(this.response))
   }
 
 }
+
 
 
 // import { Component, ElementRef, ViewChild } from '@angular/core';
