@@ -150,15 +150,30 @@
           >
             Stop Recording
           </button>
-          <!-- <button
+          <button
             type="button"
             class="btn btn-success"
-            (click)="llenarFormularioConDatosDelMensaje()"
+            (click)="sendMessage()"
           >
-            Llenar Formulario
-          </button> -->
+            Enviar Mensaje
+          </button>
         </div>
-        <p>{{ mensaje }}</p>
+         
+    <div class="container mt-5">
+      <div class="card" style="width:auto;">
+          <div class="card-body">
+              <p class="card-text">{{ mensaje }}</p>
+          </div>
+      </div>
+  </div>
+
+  <div class="container mt-5">
+    <div class="card" style="width:auto;">
+        <div class="card-body">
+            <p class="card-text">{{ response }}</p>
+        </div>
+    </div>
+</div>
       </form>
     </div>
   </div>
