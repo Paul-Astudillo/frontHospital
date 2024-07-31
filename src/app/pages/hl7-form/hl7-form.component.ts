@@ -151,8 +151,11 @@ export class Hl7FormComponent {
         this.mensaje = mensaje;
         console.log(this.mensaje);
         if(this.mensaje!=null){
-          console.log("hola entre"+this.isLoading)
+          console.log("hola entre "+this.isLoading)
           this.sendMessage();
+        }else{
+          console.log("mensaje vacio: "+"'"+this.mensaje+"'")
+          this.isLoading=false;
         }
       },
       error => {
@@ -164,6 +167,7 @@ export class Hl7FormComponent {
           showConfirmButton: false,
           timer: 1500
         });
+        this.isRecording = false;
       }
     );;
   }
@@ -190,54 +194,57 @@ export class Hl7FormComponent {
     }
   }
 
-  prompt: string = "Del siguiente texto extrae informacion del paciente, como nombres, correo, edad solo numeros, cedula, alérgias, síntomas,medicación, con los datos de alergias, sintomas, medicacion dame un prediagnóstico y ponle en el campo diagnostico, etc. Todo esta info devuelve en un archivo Json para rellenar esta clase paciente = { nombre: '',cedula: '',edad: 0,genero: 'Masculino',direccion: '',celular: '',correo: '',diagnostico: '',alergias: '',sintomas: '',medicacion:''}: "
+  prompt: string = "Del siguiente texto extrae informacion del paciente, como nombres, correo, edad solo numeros, cedula, alérgias, síntomas,medicación, con los datos de alergias, sintomas, medicacion dame un prediagnóstico y ponle en el campo diagnostico, etc. Todo esta info devuelve en un archivo Json para rellenar esta clase paciente = { nombre: '',cedula: '',edad: 0,genero: 'Masculino',direccion: '',celular: '',correo: '',diagnostico: '',alergias: '',sintomas: '',medicacion:''}, en caso de que no hay datos de donde obtener manda un mensaje de que faltan datos: "
 
   sendMessage() {
-    console.log('promtp '+this.prompt)
-    this.mensaje = this.prompt + this.mensaje 
+    console.log('prompt ' + this.prompt);
+    this.mensaje = this.prompt + this.mensaje;
     this.apichatgptService.sendMessage(this.mensaje).subscribe(
-      data => {
-        this.response = data.response;
-        if(this.response!=null){
-          this.isLoading = false;
-        }
-        console.log(this.response);
-        Swal.fire({
-          position: "center",
-          icon: "error",
-          title: "El audio proporcionado no contiene la información necesaria para extraer los datos del paciente",
-          showConfirmButton: false,
-          timer: 1500
-        });
-        const responseData = JSON.parse(this.response);
+        data => {
+            this.response = data.response;
+            console.log(this.response);
+            const responseData = JSON.parse(this.response);
 
-        // Assign the values to the paciente object
-        this.paciente.nombre = responseData.nombre || '';
-        this.paciente.cedula = responseData.cedula || '';
-        this.paciente.edad = responseData.edad || '';
-        this.paciente.genero = responseData.genero || '';
-        this.paciente.direccion = responseData.direccion || '';
-        this.paciente.celular = responseData.celular || '';
-        this.paciente.correo = responseData.correo || '';
-        this.paciente.diagnostico = responseData.diagnostico || '';
-        this.paciente.alergias = responseData.alergias || '';
-        this.paciente.sintomas = responseData.sintomas || '';
-        this.paciente.medicacion = responseData.medicacion || '';
-      },
-      error => {
-        console.error('Error:', error);
-        Swal.fire({
-          position: "center",
-          icon: "error",
-          title: error,
-          showConfirmButton: false,
-          timer: 1500
-        });
-      }
+            if (responseData.error && responseData.error === 'El texto proporcionado no contiene la información necesaria para extraer los datos del paciente') {
+                // Mostrar alerta cuando falta información
+                Swal.fire({
+                    position: "center",
+                    icon: "warning",
+                    title: "Falta de datos para extraer información",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                this.isLoading=false
+            } else {
+                // Assign the values to the paciente object
+                this.paciente.nombre = responseData.nombre || '';
+                this.paciente.cedula = responseData.cedula || '';
+                this.paciente.edad = responseData.edad || '';
+                this.paciente.genero = responseData.genero || '';
+                this.paciente.direccion = responseData.direccion || '';
+                this.paciente.celular = responseData.celular || '';
+                this.paciente.correo = responseData.correo || '';
+                this.paciente.diagnostico = responseData.diagnostico || '';
+                this.paciente.alergias = responseData.alergias || '';
+                this.paciente.sintomas = responseData.sintomas || '';
+                this.paciente.medicacion = responseData.medicacion || '';
+                this.isLoading = false;
+            }
+        },
+        error => {
+            console.error('Error:', error);
+            Swal.fire({
+                position: "center",
+                icon: "error",
+                title: error,
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
     );
 
-    console.log('repuesta '+this.response)
-    console.log(typeof(this.response))
-  }
+    console.log('respuesta ' + this.response);
+    console.log(typeof(this.response));
+}
 
 }
