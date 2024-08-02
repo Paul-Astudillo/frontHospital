@@ -1,68 +1,40 @@
 <div class="main-container-page">
   <div class="container mt-5">
-<!-- Modal para la pantalla de carga -->
-<div class="modal" tabindex="-1" role="dialog" [ngClass]="{'show': isLoading}" [ngStyle]="{'display': isLoading ? 'block' : 'none'}">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-body text-center">
-        <div class="spinner-border" role="status">
-          <span class="sr-only">Cargando...</span>
+    <!-- Modal para la pantalla de carga -->
+    <div class="modal" tabindex="-1" role="dialog" [ngClass]="{'show': isLoading}" [ngStyle]="{'display': isLoading ? 'block' : 'none'}">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-body text-center">
+            <div class="spinner-border" role="status">
+              <span class="sr-only">Cargando...</span>
+            </div>
+            <p>Procesando, por favor espere...</p>
+          </div>
         </div>
-        <p>Procesando, por favor espere...</p>
       </div>
     </div>
-  </div>
-</div>
     <div class="card">
       <form>
         <h2 class="mb-4">Formulario</h2>
         <div class="form-group">
           <label for="patientName">Nombre del Paciente:</label>
-          <input
-            type="text"
-            class="form-control"
-            id="patientName"
-            name="patientName"
-            [(ngModel)]="paciente.nombre"
-          />
+          <input type="text" class="form-control" id="patientName" name="patientName" [(ngModel)]="paciente.nombre" />
         </div>
         <div class="form-group">
-          <label for="patientId">Cedula:</label>
-          <input
-            type="text"
-            class="form-control"
-            id="cedula"
-            name="cedula"
-            [(ngModel)]="paciente.cedula"
-          />
+          <label for="cedula">Cedula:</label>
+          <input type="text" class="form-control" id="cedula" name="cedula" [(ngModel)]="paciente.cedula" />
         </div>
         <div class="form-group">
           <label for="age">Edad:</label>
-          <input
-            type="number"
-            class="form-control"
-            id="age"
-            name="age"
-            [(ngModel)]="paciente.edad"
-          />
+          <input type="number" class="form-control" id="age" name="age" [(ngModel)]="paciente.edad" />
         </div>
         <div class="form-group">
-          <label for="age">Fecha de Nacimiento:</label>
-          <input
-            type="date"
-            class="form-control"
-            id="age"
-            name="age"
-          />
+          <label for="birthDate">Fecha de Nacimiento:</label>
+          <input type="date" class="form-control" id="birthDate" name="birthDate" />
         </div>
         <div class="form-group">
           <label for="genero">Genero:</label>
-          <select 
-            class="form-control"
-            id="genero"
-            name="genero"
-            [(ngModel)]="paciente.genero"
-          >
+          <select class="form-control" id="genero" name="genero" [(ngModel)]="paciente.genero">
             <option value="Masculino">Masculino</option>
             <option value="Femenino">Femenino</option>
             <option value="Otro">Otro</option>
@@ -70,130 +42,63 @@
         </div>
         <div class="form-group">
           <label for="address">Direccion:</label>
-          <input
-            type="text"
-            class="form-control"
-            id="address"
-            name="address"
-            [(ngModel)]="paciente.direccion"
-          />
+          <input type="text" class="form-control" id="address" name="address" [(ngModel)]="paciente.direccion" />
         </div>
         <div class="form-group">
           <label for="phoneNumber">Celular:</label>
-          <input
-            type="tel"
-            class="form-control"
-            id="phoneNumber"
-            name="phoneNumber"
-            [(ngModel)]="paciente.celular"
-          />
+          <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" [(ngModel)]="paciente.celular" />
         </div>
         <div class="form-group">
           <label for="email">Correo Electronico:</label>
-          <input
-            type="email"
-            class="form-control"
-            id="email"
-            name="email"
-            [(ngModel)]="paciente.correo"
-          />
+          <input type="email" class="form-control" id="email" name="email" [(ngModel)]="paciente.correo" />
         </div>
         <div class="form-group">
+          <label for="motivoConsulta">Motivo de la Consulta:</label>
+          <textarea class="form-control" id="motivoConsulta" name="motivoConsulta" [(ngModel)]="paciente.motivoConsulta"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="enfermedadActual">Enfermedad Actual:</label>
+          <textarea class="form-control" id="enfermedadActual" name="enfermedadActual" [(ngModel)]="paciente.enfermedadActual"></textarea>
+        </div>
+        <div class="form-group" [ngStyle]="{'display': isRecording ? 'none' : 'block'}">
           <label for="diagnosis">Diagnostico:</label>
-          <textarea
-            class="form-control"
-            id="diagnosis"
-            name="diagnosis"
-            [(ngModel)]="paciente.diagnostico"
-          ></textarea>
+          <textarea class="form-control" id="diagnosis" name="diagnosis" [(ngModel)]="paciente.diagnostico"></textarea>
         </div>
         <div class="form-group">
           <label for="sintomas">Sintomas:</label>
-          <textarea
-            class="form-control"
-            id="sintomas"
-            name="sintomas"
-            [(ngModel)]="paciente.sintomas"
-          ></textarea>
+          <textarea class="form-control" id="sintomas" name="sintomas" [(ngModel)]="paciente.sintomas"></textarea>
         </div>
         <div class="form-group">
           <label for="medicacion">Medicacion:</label>
-          <textarea
-            class="form-control"
-            id="medicacion"
-            name="medicacion"
-            [(ngModel)]="paciente.medicacion"
-          ></textarea>
+          <textarea class="form-control" id="medicacion" name="medicacion" [(ngModel)]="paciente.medicacion"></textarea>
         </div>
         <div class="form-group">
           <label for="allergies">Alergias:</label>
-          <textarea
-            class="form-control"
-            id="allergies"
-            name="allergies"
-            [(ngModel)]="paciente.alergias"
-          ></textarea>
+          <textarea class="form-control" id="allergies" name="allergies" [(ngModel)]="paciente.alergias"></textarea>
         </div>
         <div class="form-group">
-          <button
-            type="button"
-            class="btn btn-primary"
-            (click)="startRecording()"
-            [disabled]="isRecording"
-          >
+          <button type="button" class="btn btn-primary" (click)="startRecording()" [disabled]="isRecording">
             <svg viewBox="0 0 16 16" width="20" height="20">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                class="bi bi-mic"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5"
-                />
-                <path
-                  d="M10 8a2 2 0 1 1-4 0V3a2 2 0 1 1 4 0zM8 0a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V3a3 3 0 0 0-3-3"
-                />
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-mic" viewBox="0 0 16 16">
+                <path d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5" />
+                <path d="M10 8a2 2 0 1 1-4 0V3a2 2 0 1 1 4 0zM8 0a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V3a3 3 0 0 0-3-3" />
               </svg>
               <circle class="wave" cx="8" cy="6" r="1" />
-              <circle
-                class="wave"
-                cx="8"
-                cy="6"
-                r="1"
-                style="animation-delay: 1s"
-              />
-              <circle
-                class="wave"
-                cx="8"
-                cy="6"
-                r="1"
-                style="animation-delay: 2s"
-              />
-              <circle
-                class="wave"
-                cx="8"
-                cy="6"
-                r="1"
-                style="animation-delay: 3s"
-              />
+              <circle class="wave" cx="8" cy="6" r="1" style="animation-delay: 1s" />
+              <circle class="wave" cx="8" cy="6" r="1" style="animation-delay: 2s" />
+              <circle class="wave" cx="8" cy="6" r="1" style="animation-delay: 3s" />
             </svg>
             Start Recording
           </button>
-          <button
-            type="button"
-            class="btn btn-secondary"
-            (click)="stopRecording()"
-            [disabled]="!isRecording"
-          >
+          <button type="button" class="btn btn-secondary" (click)="stopRecording()" [disabled]="!isRecording">
             Stop Recording
           </button>
         </div>
       </form>
     </div>
   </div>
+
+
 
 
   <div class="container mt-5 d-flex flex-row">
