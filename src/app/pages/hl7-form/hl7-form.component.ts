@@ -194,7 +194,7 @@ export class Hl7FormComponent {
     }
   }
 
-  prompt: string = "Del siguiente texto extrae informacion del paciente, como nombres, correo, edad solo numeros, cedula, alérgias, síntomas,medicación, con los datos de alergias, sintomas, medicacion dame un prediagnóstico y ponle en el campo diagnostico, etc. Todo esta info devuelve en un archivo Json para rellenar esta clase paciente = { nombre: '',cedula: '',edad: 0,genero: 'Masculino',direccion: '',celular: '',correo: '',diagnostico: '',alergias: '',sintomas: '',medicacion:''}, en caso de que no hay datos de donde obtener manda un mensaje de que faltan datos: "
+  prompt: string = "De la siguiente conversacion extrae informacion del paciente, como nombres, correo, edad solo numeros, cedula, alérgias, síntomas,medicación, con los datos de alergias, sintomas, medicacion dame un prediagnóstico y ponle en el campo diagnostico, etc. Todo esta info devuelve en un archivo Json para rellenar esta clase paciente = { nombre: '',cedula: '',edad: 0,genero: 'Masculino',direccion: '',celular: '',correo: '',diagnostico: '',alergias: '',sintomas: '',medicacion:''}, en caso de que no hay datos de donde obtener manda un mensaje de que faltan datos: "
 
   sendMessage() {
     console.log('prompt ' + this.prompt);
