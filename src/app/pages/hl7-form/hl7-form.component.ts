@@ -35,6 +35,7 @@ export class Hl7FormComponent {
   predictionUrl: string | null = null;
   mensaje: string = '';
   response: string = '';
+  diagnostico = false
 
   @ViewChild('fileInput', { static: false }) fileInput!: ElementRef;
 
@@ -145,8 +146,8 @@ export class Hl7FormComponent {
         this.mensaje = mensaje;
         console.log(this.mensaje);
         if (this.mensaje != null) {
-          console.log("hola entre " + this.isLoading)
           this.sendMessage();
+          this.diagnostico=true;
         } else {
           console.log("mensaje vacio: " + "'" + this.mensaje + "'")
           this.isLoading = false;
@@ -161,7 +162,7 @@ export class Hl7FormComponent {
           showConfirmButton: false,
           timer: 1500
         });
-        this.isRecording = false;
+        this.isLoading = false;
       }
     );
   }
