@@ -85,7 +85,7 @@ La API de ChatGPT extrae y organiza los datos m√°s relevantes de la transcripci√
 - Iniciamos el servidor backend y frontend
 - Accedemos a la pagina y vamos a la seccion del formulario hl7
  
- ![alt text](image.png)
+ ![alt text](image-6.png)
 
 - hacemos click en el boton start recording y empieza a grabar (hay que habilitar el microfono en el navegador)
 
